@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résumé Newsletter - Interface Vanilla</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="workflow.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Étape 2 : Résumé de la Newsletter</h1>
+            <p>Générez un résumé de votre newsletter</p>
+        </header>
+
+        <main>
+            <div class="workflow-section">
+                <div class="workflow-info">
+                    <h3>Informations du workflow</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>Fichier HTML :</strong>
+                            <span id="html-file">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Fichier Excel :</strong>
+                            <span id="excel-file">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Conseiller sélectionné :</strong>
+                            <span id="selected-conseiller">Chargement...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-section">
+                    <h3>Prompt pour ChatGPT</h3>
+                    <div class="prompt-container">
+                        <textarea id="prompt-text" readonly placeholder="Le prompt sera généré ici..."></textarea>
+                        <div class="prompt-actions">
+                            <button type="button" id="btn-copy-prompt" class="btn-secondary">
+                                📋 Copier le prompt
+                            </button>
+                            <button type="button" id="btn-generate-prompt" class="btn-primary">
+                                🔄 Régénérer le prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="response-section">
+                    <h3>Réponse de ChatGPT</h3>
+                    <div class="response-container">
+                        <textarea id="response-text" placeholder="Collez ici la réponse de ChatGPT..."></textarea>
+                        <div class="response-actions">
+                            <button type="button" id="btn-save-response" class="btn-primary" disabled>
+                                💾 Sauvegarder et continuer
+                            </button>
+                            <button type="button" id="btn-clear-response" class="btn-secondary">
+                                🗑️ Effacer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button type="button" id="btn-back" class="btn-secondary">
+                    ← Retour
+                </button>
+                <button type="button" id="btn-next" class="btn-primary" disabled>
+                    Continuer →
+                </button>
+            </div>
+
+            <div class="status-message" id="status-message"></div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="utils.js"></script>
+    <script src="resume.js"></script>
+</body>
+</html> 

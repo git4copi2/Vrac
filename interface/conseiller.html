@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse Conseiller - Interface Vanilla</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="workflow.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Étape 3 : Analyse par Section</h1>
+            <p>Analysez chaque section du conseiller avec le résumé de la newsletter</p>
+        </header>
+
+        <main>
+            <div class="workflow-section">
+                <div class="workflow-info">
+                    <h3>Informations du workflow</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>Conseiller :</strong>
+                            <span id="conseiller-name">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Résumé newsletter :</strong>
+                            <span id="resume-status">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Sections à analyser :</strong>
+                            <span id="sections-count">Chargement...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sections-container">
+                    <h3>Sections du conseiller</h3>
+                    <div id="sections-list">
+                        <!-- Les sections seront générées dynamiquement -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button type="button" id="btn-back" class="btn-secondary">
+                    ← Retour
+                </button>
+                <button type="button" id="btn-next" class="btn-primary" disabled>
+                    Continuer →
+                </button>
+            </div>
+
+            <div class="status-message" id="status-message"></div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="utils.js"></script>
+    <script src="conseiller.js"></script>
+</body>
+</html> 

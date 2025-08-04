@@ -1,0 +1,316 @@
+/* Styles spécifiques pour les pages de workflow */
+
+.workflow-section {
+    background: #ffffff;
+    border: 2px solid #e0e0e0;
+    border-radius: 0;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.workflow-info {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.workflow-info h3 {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.info-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 0;
+    border-left: 4px solid #3498db;
+}
+
+.info-item strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.info-item span {
+    color: #34495e;
+    font-weight: 500;
+}
+
+/* Sections Prompt et Réponse */
+.prompt-section, .response-section {
+    margin-bottom: 30px;
+}
+
+.prompt-section h3, .response-section h3 {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.prompt-container, .response-container {
+    border: 2px solid #e0e0e0;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.prompt-container textarea, .response-container textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 20px;
+    border: none;
+    resize: vertical;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    background: #f8f9fa;
+    color: #2c3e50;
+}
+
+.prompt-container textarea:focus, .response-container textarea:focus {
+    outline: none;
+    background: #ffffff;
+}
+
+.prompt-container textarea[readonly] {
+    background: #ecf0f1;
+    color: #7f8c8d;
+}
+
+.prompt-actions, .response-actions {
+    display: flex;
+    gap: 10px;
+    padding: 15px 20px;
+    background: #ecf0f1;
+    border-top: 1px solid #bdc3c7;
+}
+
+.prompt-actions button, .response-actions button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+/* Navigation */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #e0e0e0;
+}
+
+.navigation-buttons button {
+    padding: 12px 24px;
+    font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .prompt-actions, .response-actions {
+        flex-direction: column;
+    }
+    
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .navigation-buttons button {
+        width: 100%;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.workflow-section {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* États spéciaux */
+.prompt-container textarea:focus {
+    border-left: 4px solid #3498db;
+}
+
+.response-container textarea:focus {
+    border-left: 4px solid #27ae60;
+}
+
+/* Copie réussie */
+.copy-success {
+    background: #d4edda !important;
+    color: #155724 !important;
+    border-color: #c3e6cb !important;
+}
+
+/* Sections du conseiller */
+.sections-container {
+    margin-top: 30px;
+}
+
+.sections-container h3 {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.section-item {
+    border: 2px solid #e0e0e0;
+    border-radius: 0;
+    margin-bottom: 20px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.section-header {
+    padding: 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.section-header h4 {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.section-header p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin: 5px 0 0 0;
+    flex: 1;
+}
+
+.section-status {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.status-pending {
+    color: #f39c12;
+}
+
+.status-completed {
+    color: #27ae60;
+}
+
+.section-content {
+    padding: 20px;
+}
+
+.section-content h5 {
+    color: #2c3e50;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.section-toggle {
+    padding: 15px 20px;
+    background: #ecf0f1;
+    border-top: 1px solid #bdc3c7;
+}
+
+.section-toggle button {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+/* Responsive pour les sections */
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .section-header h4 {
+        margin-bottom: 5px;
+    }
+    
+    .section-status {
+        align-self: flex-end;
+    }
+}
+
+/* Styles pour la page finale */
+.final-prompt-section, .final-response-section, .final-result-section {
+    margin-bottom: 30px;
+}
+
+.final-result-section {
+    border: 2px solid #27ae60;
+    background: #f8fff9;
+}
+
+.result-container {
+    padding: 20px;
+}
+
+.result-header {
+    border-bottom: 2px solid #27ae60;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.result-header h4 {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    margin: 0 0 5px 0;
+    font-weight: 600;
+}
+
+.result-date {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.result-content {
+    line-height: 1.6;
+    color: #2c3e50;
+}
+
+.result-actions {
+    display: flex;
+    gap: 10px;
+    padding: 15px 20px;
+    background: #ecf0f1;
+    border-top: 1px solid #bdc3c7;
+}
+
+.result-actions button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+} 

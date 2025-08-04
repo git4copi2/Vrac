@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthèse Finale - Interface Vanilla</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="workflow.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Étape 4 : Synthèse Finale</h1>
+            <p>Générez la synthèse finale basée sur toutes les analyses</p>
+        </header>
+
+        <main>
+            <div class="workflow-section">
+                <div class="workflow-info">
+                    <h3>Récapitulatif du workflow</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>Conseiller :</strong>
+                            <span id="conseiller-name">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Résumé newsletter :</strong>
+                            <span id="resume-status">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Sections analysées :</strong>
+                            <span id="sections-status">Chargement...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="final-prompt-section">
+                    <h3>Prompt Final pour ChatGPT</h3>
+                    <div class="prompt-container">
+                        <textarea id="final-prompt" readonly placeholder="Le prompt final sera généré ici..."></textarea>
+                        <div class="prompt-actions">
+                            <button type="button" id="btn-copy-final-prompt" class="btn-secondary">
+                                📋 Copier le prompt
+                            </button>
+                            <button type="button" id="btn-generate-final-prompt" class="btn-primary">
+                                🔄 Régénérer le prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="final-response-section">
+                    <h3>Synthèse Finale de ChatGPT</h3>
+                    <div class="response-container">
+                        <textarea id="final-response" placeholder="Collez ici la synthèse finale de ChatGPT..."></textarea>
+                        <div class="response-actions">
+                            <button type="button" id="btn-save-final" class="btn-primary" disabled>
+                                💾 Sauvegarder la synthèse
+                            </button>
+                            <button type="button" id="btn-clear-final" class="btn-secondary">
+                                🗑️ Effacer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="final-result-section" id="final-result-section" style="display: none;">
+                    <h3>Résultat Final</h3>
+                    <div class="result-container">
+                        <div id="final-result-content">
+                            <!-- Le résultat final sera affiché ici -->
+                        </div>
+                        <div class="result-actions">
+                            <button type="button" id="btn-download-result" class="btn-primary">
+                                📥 Télécharger le résultat
+                            </button>
+                            <button type="button" id="btn-print-result" class="btn-secondary">
+                                🖨️ Imprimer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button type="button" id="btn-back" class="btn-secondary">
+                    ← Retour
+                </button>
+                <button type="button" id="btn-restart" class="btn-primary">
+                    🔄 Recommencer
+                </button>
+            </div>
+
+            <div class="status-message" id="status-message"></div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="utils.js"></script>
+    <script src="final.js"></script>
+</body>
+</html> 

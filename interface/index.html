@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface Newsletter - Vanilla</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Interface Newsletter</h1>
+            <p>Traitez vos newsletters et données conseillers</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <h2>Étape 1 : Upload des fichiers</h2>
+                
+                <div class="file-upload-container">
+                    <!-- Newsletter HTML -->
+                    <div class="file-upload">
+                        <h3>Newsletter HTML</h3>
+                        <div class="dropzone" id="dropzone-html">
+                            <div class="dropzone-content">
+                                <div class="upload-icon">📄</div>
+                                <p>Glissez-déposez votre fichier HTML ici</p>
+                                <p>ou</p>
+                                <label for="input-html" class="btn-secondary">Sélectionner un fichier</label>
+                                <input type="file" id="input-html" accept=".html,.htm" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="file-info" id="html-info" style="display: none;">
+                            <span id="html-filename"></span>
+                            <button type="button" class="btn-remove" id="remove-html">✕</button>
+                        </div>
+                    </div>
+
+                    <!-- Excel Conseillers -->
+                    <div class="file-upload">
+                        <h3>Fichier Excel Conseillers</h3>
+                        <div class="dropzone" id="dropzone-excel">
+                            <div class="dropzone-content">
+                                <div class="upload-icon">📊</div>
+                                <p>Glissez-déposez votre fichier Excel ici</p>
+                                <p>ou</p>
+                                <label for="input-excel" class="btn-secondary">Sélectionner un fichier</label>
+                                <input type="file" id="input-excel" accept=".xlsx,.xls" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="file-info" id="excel-info" style="display: none;">
+                            <span id="excel-filename"></span>
+                            <button type="button" class="btn-remove" id="remove-excel">✕</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="button" id="btn-process" class="btn-primary" disabled>
+                        Traiter les fichiers
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section Conseiller (cachée par défaut) -->
+            <div class="conseiller-section" id="conseiller-section" style="display: none;">
+                <h2>Étape 2 : Sélection du conseiller</h2>
+                <div class="conseiller-selector">
+                    <label for="select-conseiller">Choisissez un conseiller :</label>
+                    <select id="select-conseiller">
+                        <option value="">Sélectionnez un conseiller...</option>
+                    </select>
+                </div>
+                <div class="action-buttons">
+                    <button type="button" id="btn-continue" class="btn-primary" disabled>
+                        Continuer
+                    </button>
+                </div>
+            </div>
+
+            <!-- Messages de statut -->
+            <div class="status-message" id="status-message"></div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="utils.js"></script>
+    <script src="app.js"></script>
+</body>
+</html> 
