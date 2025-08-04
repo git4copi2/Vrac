@@ -196,6 +196,7 @@ class NewsletterInterface {
             const htmlContent = await this.readFileAsText(this.files.html);
             const markdownContent = await NewsletterUtils.htmlToMarkdown(htmlContent);
             
+            console.log('MARKDOWN:', markdownContent);
             // Traiter le fichier Excel
             const excelData = await NewsletterUtils.parseExcelFile(this.files.excel);
             
@@ -261,14 +262,12 @@ class NewsletterInterface {
             return;
         }
 
-        // Stocker les données pour la suite
-        const workflowData = {
-            htmlFile: this.files.html.name,
-            excelFile: this.files.excel.name,
-            selectedConseiller: selectedConseiller,
-            conseillers: this.conseillers,
-            timestamp: new Date().toISOString()
-        };
+        // Récupère l'ancien workflow
+        let workflowData = JSON.parse(localStorage.getItem('newsletterWorkflow')) || {};
+
+        // Mets à jour seulement ce qui change
+        workflowData.selectedConseiller = selectedConseiller;
+        workflowData.timestamp = new Date().toISOString();
 
         localStorage.setItem('newsletterWorkflow', JSON.stringify(workflowData));
         
