@@ -1,3 +1,24 @@
+// Colonnes Excel à utiliser
+const EXCEL_COLUMNS = {
+    'Portfolio': 'A',
+    'CODE ISIN': 'C',
+    'INSTRUMENT': 'E',
+    'EMMETEUR': 'F',
+    'CONSEILLER': 'U',
+    'INSTRUMENT.1': 'AC', // Secteur
+    'EMMETEUR/PAYS DE RESIDENCE': 'AM'
+};
+
+const REQUIRED_COLUMNS = [
+    'Portfolio',
+    'CODE ISIN',
+    'INSTRUMENT',
+    'EMMETEUR',
+    'CONSEILLER',
+    'INSTRUMENT.1',
+    'EMMETEUR/PAYS DE RESIDENCE'
+];
+
 // Utilitaires JavaScript pour reproduire la logique Python
 class NewsletterUtils {
     
@@ -34,15 +55,16 @@ class NewsletterUtils {
         });
     }
     
+
     static convertToMarkdown(element) {
         let markdown = '';
-        
+
         for (let child of element.childNodes) {
             if (child.nodeType === Node.TEXT_NODE) {
                 markdown += child.textContent;
             } else if (child.nodeType === Node.ELEMENT_NODE) {
                 const tagName = child.tagName.toLowerCase();
-                
+
                 switch (tagName) {
                     case 'h1':
                     case 'h2':
@@ -78,13 +100,34 @@ class NewsletterUtils {
                         });
                         markdown += '\n';
                         break;
+                    case 'a':
+                        markdown += `[${child.textContent}](${child.getAttribute('href')})`;
+                        break;
+                    case 'table':
+                        // Simple table conversion for markdown
+                        markdown += '\n';
+                        const rows = child.querySelectorAll('tr');
+                        rows.forEach((row, rowIndex) => {
+                            const cells = row.querySelectorAll('th,td');
+                            let rowData = [];
+                            cells.forEach(cell => {
+                                rowData.push(cell.textContent.trim());
+                            });
+                            markdown += '| ' + rowData.join(' | ') + ' |\n';
+                            // Add separator after header
+                            if (rowIndex === 0) {
+                                markdown += '| ' + '--- |'.repeat(rowData.length) + '\n';
+                            }
+                        });
+                        markdown += '\n';
+                        break;
                     default:
                         markdown += this.convertToMarkdown(child);
                         break;
                 }
             }
         }
-        
+
         return markdown;
     }
     
@@ -93,32 +136,51 @@ class NewsletterUtils {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             
-            reader.onload = function(e) {
+            reader.onload = async (e) => {
                 try {
                     const data = new Uint8Array(e.target.result);
                     const workbook = XLSX.read(data, { type: 'array' });
                     const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-                    const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
                     
-                    // Convertir en format plus utilisable
-                    const headers = jsonData[0];
-                    const rows = jsonData.slice(1);
+                    // Convertir uniquement les colonnes nécessaires
+                    let jsonData = [];
+                    const range = XLSX.utils.decode_range(firstSheet['!ref']);
                     
-                    const processedData = rows.map(row => {
-                        const obj = {};
-                        headers.forEach((header, index) => {
-                            obj[header] = row[index] || '';
-                        });
-                        return obj;
-                    });
+                    for (let row = range.s.r + 1; row <= range.e.r; row++) {
+                        let rowData = {};
+                        let hasData = false;
+                        
+                        // Parcourir uniquement les colonnes requises
+                        for (const [columnName, columnLetter] of Object.entries(EXCEL_COLUMNS)) {
+                            const cellAddress = columnLetter + (row + 1);
+                            const cell = firstSheet[cellAddress];
+                            
+                            if (cell) {
+                                rowData[columnName] = cell.v;
+                                hasData = true;
+                            } else {
+                                rowData[columnName] = null;
+                            }
+                        }
+                        
+                        // N'ajouter la ligne que si elle contient des données
+                        if (hasData) {
+                            jsonData.push(rowData);
+                        }
+                    }
                     
-                    resolve(processedData);
+                    jsonData = jsonData.filter(row => row['CODE ISIN'] && row['CODE ISIN'].toString().trim().length > 0);
+                    
+                    resolve(jsonData);
                 } catch (error) {
-                    reject(error);
+                    reject(new Error('Erreur lors du traitement du fichier Excel: ' + error.message));
                 }
             };
             
-            reader.onerror = reject;
+            reader.onerror = () => {
+                reject(new Error('Erreur lors de la lecture du fichier Excel'));
+            };
+            
             reader.readAsArrayBuffer(file);
         });
     }
